@@ -1,3 +1,128 @@
+/**
+ * 1 - chamada para API - Back-end
+ * link do GET: http://sdw24.sa-east-1.elasticbeanstalk.com/champions
+ * link do POST: http://sdw24.us-east-1.elasticbeanstalk.com/champions/{1}/ask
+ * outro http://sdw24.sa-east-1.elasticbeanstalk.com/swagger-ui/index.html#/Campe%C3%B5es/askChampion
+ */
+const routes = {
+  champions: "http://sdw24.sa-east-1.elasticbeanstalk.com/champions",  
+  ask: "http://sdw24.us-east-1.elasticbeanstalk.com/champions/{id}/ask",     
+};
+
+const apiServive = {
+  async getChampions() {
+    const route = routes.champions;
+    const response = await fetch(route);
+    return await response.json(); 
+  },
+  async postAskChampion(id, message) {
+    const route = routes.ask.replace("{id}", id);
+
+    const options = {
+      method: "POST",
+      Headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ question: message }),
+    };
+
+    const response = await fetch(route, options);
+    return await response.json();
+  },    
+};
+
+  // Guardar dados dos personagens
+    const state = {    
+      values: {
+        champions: [],
+    },
+    views: {
+        response: document.querySelector(".text-response"),
+        question: document.getElementById("text-request"),
+        avatar: document.getElementById("avatar"),
+        carousel: document.getElementById("carousel-cards-content"),
+      },
+    };
+
+async function main(){
+    // 1 - chamada para api - Back-end OK
+    await loadChampions()
+    await renderChampions()    
+    await loadCarrousel();
+}
+
+async function loadChampions() {
+    // 1 - chamada para API
+    const data = await apiServive.getChampions();
+    // 2 - guardar dados de personagens
+    state.values.champions = data;
+}
+
+http://sdw24.sa-east-1.elasticbeanstalk.com/swagger-ui/index.html#/Campe%C3%B5es/askChampion
+
+async function renderChampions() {
+    // 3 - carregar personagens na tela
+    const championsData = state.values.champions;
+    const elements = championsData.map((character) => {
+        `<div class="timeline-carousel__item" 
+        onclick="onChangeChampionSelected(${character.id}, ${character.imageUrl}')">
+        <div class="timeline-carousel__image">
+          <div class="media-wrapper media-wrapper--overlay"
+            style="background: url('${character.imageUrl}') center center; background-size:cover;">
+          </div>,
+        </div>
+        <div class="timeline-carousel__item-inner">
+          <span class="name">${character.name}</span>
+          <span class="role">${character.role}</span>
+          <p>${character.lore}</p>
+        </div>
+      </div>`;
+      });
+    
+    state.views.carousel.innerHTML = elements.join(" ");
+  }
+
+async function onChangeChampionSelected(id, imageUrl) {
+  // 1 - trocar a imagem de fundo da bolinha
+  state.views.avatar.style.backgroundImage = `url('${imageUrl}')`;
+  // 2 - guardar o id selecionado
+  state.views.avatar.dataset.id = id;
+  // 3 - reset do formulário
+  await resetForm();
+}
+
+async function resetForm() {
+  state.views.question.value = "";
+  state.views.response.textContent = await
+  getRondomQuote();
+}
+
+async function getRondomQuote() {
+    const quotes = [
+        "E aí pronto(a) para a nossa jornada?",
+        "Aguardo a sua resposta, ve se não demora muito, OK!",
+        "Não vai ficar aí a vida toda não é ?!",
+        "Vamos nessa meu amigo(a)!",
+    ]
+
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+
+    return quotes[randomIndex]
+}
+
+async function fetchAskChampion() {    
+    document.body.style.cursor = "awat";
+    const id = state.views.avatar.dataset.id;
+    const message = state.views.question.value;
+
+    alert(id);
+    alert(message);
+
+    const response = await apiServive.postAskChampion(id, message);
+    state.views.response.textContent = response.answer;
+    document.body.style.cursor = "default";
+}
+
 async function loadCarrousel() {
     const caroujs = (el) => {
       return $("[data-js=" + el + "]");
@@ -29,3 +154,4 @@ async function loadCarrousel() {
   }
   
   loadCarrousel();
+  main();

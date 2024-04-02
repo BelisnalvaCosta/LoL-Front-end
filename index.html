@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
     <title>League of Legends - Champions</title>
 
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css'>
-    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="./src/styles/style.css">
   
     <link data-react-helmet="true" rel="icon" href="/assets/icone.ico">
 </head>
@@ -123,7 +121,7 @@
         <div class="input-group mb-3 mt-3" style="position: absolute; bottom:0; width: 40rem;">
           <input id="text-request" style="background-color: #D1D1D1;" type="text" class="form-control"
             placeholder="Pergunte-me algo" aria-label="Pergunte-me Algo" aria-describedby="btn-get-api">
-          <button class="btn btn-outline-secondary" type="button" id="btn-get-api">
+          <button class="btn btn-outline-secondary" type="button" id="btn-get-api" onclick="fetchAskChampion">
             Perguntar
           </button>
         </div>
@@ -140,21 +138,18 @@
       <div id="carousel-cards-content" class="timeline-carousel__item-wrapper" data-js="timeline-carousel">
   
         <!--Timeline item-->
-        <div class="timeline-carousel__item">
+        <div class="timeline-carousel__item" onclick="onChangeChampionSelected()">
           <div class="timeline-carousel__image">
             <div class="media-wrapper media-wrapper--overlay"
-              style="background: url('https://via.placeholder.com/550x320/171717/cccccc?text=550x320') center center; background-size:cover;">
+              style="background: url('${character.imageUrl}') center center; background-size:cover;">
             </div>
           </div>
           <div class="timeline-carousel__item-inner">
-            <span class="name">2007</span>
-            <span class="role">Egestas quis ipsum</span>
-            <p>Non odio euismod lacinia at. Egestas quis ipsum suspendisse ultrices gravida. Dui nunc mattis enim ut
-              tellus elementum sagittis vitae. Lectus quam id leo in vitae turpis massa sed elementum. Ridiculus mus
-              mauris vitae ultricies leo integer malesuada. Semper feugiat nibh sed pulvinar proin gravida hendrerit
-              lectus./p>
+            <span class="name">${character.name}</span>
+            <span class="role">${character.role}</span>
+            <p>${character.lore}</p>
           </div>
-        </div>
+        </div>          
         <!--/Timeline item-->
   
       </div>

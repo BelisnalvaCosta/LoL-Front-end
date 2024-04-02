@@ -57,9 +57,9 @@ body {
   padding-right: 30px;
 }
 .timeline-carousel__item {
-  cursor: grab;
-  cursor: -moz-grab;
   cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
 }
 .timeline-carousel__item .media-wrapper {
   opacity: 0.4;
@@ -193,9 +193,9 @@ body {
   z-index: 2;
 }
 .slick-dots li {
-  cursor: grab;
-  cursor: -moz-grab;
   cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
   display: inline-block;
   margin: 0 6px;
   position: relative;

@@ -3,7 +3,7 @@ Criando LoL em HTLM, JavaScript e CSS e interligando as APIs - Back-end com Fron
 
 Feitos na IDE Visual Studio Code, linguagem Html, JavaScript e CSS.
 
-Este projeto, têm etapas das tecnologias Back-end e Front-end, com o objetivo de integração de APIs feita na IDE IntelliJ e Visual Studio Code.  
+Este projeto, têm etapas das tecnologias Back-end e Front-end, com o objetivo de integração de APIs feita na IDEA IntelliJ e Visual Studio Code.  
 Autores dos projetos Venilton FalvoJr e Felipe Aguiar (DIO.me). 
 Swagger: http://sdw24.us-east-1.elasticbeanstalk.com/lol-api/swagger-ui/index.html
 
@@ -17,8 +17,9 @@ RESTful API e Java 17 com Spring
 
 ## Dependências e framework
 1 - Jpa;
-2 - Spring Boot
+2 - Spring Web
 3 - H2
-3 - RESTful Framework (...)
+4 - Feign
+3 - RESTful
 
 [^1]: Este projeto com a orientação do Expert Felipe Aguiar.
